@@ -11,31 +11,12 @@ find_package(Threads REQUIRED)
 find_package(GTest REQUIRED)
 enable_testing()
 
-find_package(Vector QUIET)
-
-if(NOT Vector_FOUND)
-    include(FetchContent)
-    FetchContent_Declare(
-        Vector
-        GIT_REPOSITORY https://github.com/LegendaryHog/Vector
-        GIT_TAG        master
-        OVERRIDE_FIND_PACKAGE
-    )
-endif()
-
-find_package(Vector)
-if (${Vector_FOUND})
-    message(STATUS "Found Vector - done")
-else()
-    message(FATAL_ERROR "Didn't find Vector")
-endif()
-
 set(CMAKE_CXX_STANDARD          20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF)
 
 add_library(${PROJECT_NAME} INTERFACE)
-target_link_libraries(${PROJECT_NAME} INTERFACE Vector)
+#target_link_libraries(${PROJECT_NAME} INTERFACE Vector)
 target_include_directories(${PROJECT_NAME} INTERFACE lib/include)
 
 add_subdirectory(unit_tests)
